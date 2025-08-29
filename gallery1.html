@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Simple Gallery</title>
+    <meta name="description" content="Responsive gallery one-page template template">
+    <meta name="keywords" content="gallery, gallery template, html5 template, css3 template">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="shortcut icon" href="static/images/favicons/favicon.png" type="image/x-icon">
+    <link rel="apple-touch-icon" href="static/images/favicons/apple-touch-icon.png">
+    <link rel="apple-touch-icon-precomposed" href="static/images/favicons/apple-touch-icon-precomposed.png">
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans&amp;subset=latin,cyrillic%7CPT+Serif&amp;subset=latin,cyrillic" rel="stylesheet" type="text/css">
+    <style>
+        /* Base styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'PT Sans', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        /* Header styles */
+        .page-header {
+            background: linear-gradient(135deg, #2c3e50 0%, #1a2530 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .page-header__title {
+            font-family: 'PT Serif', serif;
+            font-size: 2.5rem;
+            margin: 0;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+        
+        /* Main content */
+        .page-content {
+            padding: 2rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Gallery grid */
+        .gallery__flow {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .gallery__isle {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .gallery__isle:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .gallery__preview-image {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .gallery__preview-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery__isle:hover .gallery__preview-image img {
+            transform: scale(1.05);
+        }
+        
+        /* Caption styles */
+        .gallery__preview-caption {
+            padding: 1.2rem;
+        }
+        
+        .gallery__preview-title {
+            font-family: 'PT Serif', serif;
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: #2c3e50;
+        }
+        
+        .gallery__preview-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+        
+        .gallery__preview-link {
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+        }
+        
+        .gallery__preview-link_role_original {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .gallery__preview-link_role_author {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        .gallery__preview-link_role_photographer {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .gallery__preview-link:hover {
+            opacity: 0.9;
+        }
+        
+        /* Footer styles */
+        .page-footer {
+            background: #2c3e50;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .page-footer__text {
+            margin-bottom: 0.5rem;
+        }
+        
+        .page-footer__text-link {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .page-footer__text-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .page-header__title {
+                font-size: 2rem;
+            }
+            
+            .gallery__flow {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 1rem;
+            }
+            
+            .gallery__preview-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .gallery__flow {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-header__title {
+                font-size: 1.8rem;
+            }
+        }
+        
+        /* Additional visual enhancements */
+        .gallery__isle-inner {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .gallery__isle-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .gallery__preview {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .gallery__preview-info {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <header class="page-header">
+        <div class="page-header__inner">
+            <div class="page-header__group">
+                <h1 class="page-header__title">My Awesome Street Art Gallery</h1>
+            </div>
+        </div>
+    </header>
+    
+    <div class="page-content">
+        <main class="page-content__main">
+            <section class="page-content__gallery">
+                <div class="gallery">
+                    <div class="gallery__inner">
+                        <div class="gallery__flow">
+                            <!-- Gallery items -->
+                            <div class="gallery__isle">
+                                <div class="gallery__isle-inner">
+                                    <div class="gallery__isle-content">
+                                        <figure class="gallery__preview">
+                                            <div class="gallery__preview-image">
+                                                <img src="https://images.unsplash.com/photo-1518693800412-ad863ffc70f2?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="አድራሻ አዲስ አበባ">
+                                            </div>
+                                            <figcaption class="gallery__preview-caption">
+                                                <div class="gallery__preview-info">
+                                                    <h2 class="gallery__preview-title">ሃናን ሻፊ</h2>
+                                                    <div class="gallery__preview-links">
+                                                        <a class="gallery__preview-link gallery__preview-link_role_original" href="https://t.me/+Y05UJBtHxGAzZWM0">ተጨማሪ መረጃ ለማግኘት</a>
+                                                        <a class="gallery__preview-link gallery__preview-link_role_author" href="https://t.me/+PTMg6tJ9-c5mOTdk">ተጨማሪ ፎቶዎቿን ለማግኘት</a>
+                                                        <a class="gallery__preview-link gallery__preview-link_role_photographer" href="https://t.me/+GdkhXCP-gIg0ZThk">ስልኳን ለማግኘት</a>
+                                                    </div>
+                                                </div>
+                                            </figcaption>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="gallery__isle">
+                                <div class="gallery__isle-inner">
+                                    <div class="gallery__isle-content">
+                                        <figure class="gallery__preview">
+                                            <div class="gallery__preview-image">
+                                                <img src="https://images.unsplash.com/photo-1511406361295-0a1ef814c034?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="አድራሻ ሀዋሳ">
+                                            </div>
+                                            <figcaption class="gallery__preview-caption">
+                                                <div class="gallery__preview-info">
+                                                    <h2 class="gallery__preview-title">መስከረም አበራ</h2>
+                                                    <div class="gallery__preview-links">
+                                                        <a class="gallery__preview-link gallery__preview-link_role_original" href="https://t.me/+GdkhXCP-gIg0ZThk">ተጨማሪ መረጃ ለማግኘት</a>
+                                                        <a class="gallery__preview-link gallery__preview-link_role_author" href="https://t.me/+PTMg6tJ9-c5mOTdk">ተጨማሪ ፎቶዎቿን ለማግኘት</a>
+                                                        <a class="gallery__preview-link gallery__preview-link_role_photographer" href="https://t.me/+Y05UJBtHxGAzZWM0">ስልኳን ለማግኘት</a>
+                                                    </div>
+                                                </div>
+                                            </figcaption>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="gallery__isle">
+                                <div class="gallery__isle-inner">
+                                    <div class="gallery__isle-content">
+                                        <figure class="gallery__preview">
+                                            <div class="gallery__preview-image">
+                                                <img src="https://images.unsplash.com/photo-1542224566-6f835bc02090?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Abstract street art">
+                                            </div>
+                                            <figcaption class="gallery__preview-caption">
+                                                <div class="gallery__preview-info">
+                                                    <h2 class="gallery__preview-title">ሳምራዊት ሀጎስ</h2>
+                                                    <div class="gallery__preview-links">
+                                                        <a class="gallery__preview-link gallery__preview-link_role_original" href="https://t.me/+Y05UJBtHxGAzZWM0">ተጨማሪ መረጃ ለማግኘት</a>
+                                                        <a class="gallery__preview-link gallery__preview-link_role_author" href="https://t.me/+PTMg6tJ9-c5mOTdk">ስልኳን ለማግኘት</a>
+                                                        <a class="gallery__preview-link gallery__preview-link_role_photographer" href="https://t.me/+GdkhXCP-gIg0ZThk">ተጨማሪ ፎቶዎቿን ለማግኘት</a>
+                                                    </div>
+                                                </div>
+                                            </figcaption>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="gallery__isle">
+                                <div class="gallery__isle-inner">
+                                    <div class="gallery__isle-content">
+                                        <figure class="gallery__preview">
+                                            <div class="gallery__preview-image">
+                                                <img src="https://images.unsplash.com/photo-1570023345337-85f14d94550f?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Political street art">
+                                            </div>
+                                            <figcaption class="gallery__preview-caption">
+                                                <div class="gallery__preview-info">
+                                                    <h2 class="gallery__preview-title">Voice of the Street</h2>
+                                                    <div class="gallery__preview-links">
+                                                        <a class="gallery__preview-link gallery__preview-link_role_original" href="https://unsplash.com">ተጨማሪ መረጃ ለማግኘት</a>
+                                                        <a class="gallery__preview-link gallery__preview-link_role_author" href="#">UrbanVoice</a>
+                                                        <a class="gallery__preview-link gallery__preview-link_role_photographer" href="https://unsplash.com">Sam Streetview</a>
+                                                    </div>
+                                                </div>
+                                            </figcaption>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="gallery__isle">
+                                <div class="gallery__isle-inner">
+                                    <div class="gallery__isle-content">
+                                        <figure class="gallery__preview">
+                                            <div class="gallery__preview-image">
+                                                <img src="https://images.unsplash.com/photo-1581972336084-bf972a4e35df?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="3D street art">
+                                            </div>
+                                            <figcaption class="gallery__preview-caption">
+                                                <div class="gallery__preview-info">
+                                                    <h2 class="gallery__preview-title">3D Illusion</h2>
+                                                    <div class="gallery__preview-links">
+                                                        <a class="gallery__preview-link gallery__preview-link_role_original" href="https://unsplash.com">ተጨማሪ መረጃ ለማግኘት</a>
+                                                        <a class="gallery__preview-link gallery__preview-link_role_author" href="#">DepthCreator</a>
+                                                        <a class="gallery__preview-link gallery__preview-link_role_photographer" href="https://unsplash.com">Lisa Artview</a>
+                                                    </div>
+                                                </div>
+                                            </figcaption>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="gallery__isle">
+                                <div class="gallery__isle-inner">
+                                    <div class="gallery__isle-content">
+                                        <figure class="gallery__preview">
+                                            <div class="gallery__preview-image">
+                                                <img src="https://images.unsplash.com/photo-1581783898377-1ceee0786a27?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Stencil art on wall">
+                                            </div>
+                                            <figcaption class="gallery__preview-caption">
+                                                <div class="gallery__preview-info">
+                                                    <h2 class="gallery__preview-title">Precision Stencil</h2>
+                                                    <div class="gallery__preview-links">
+                                                        <a class="gallery__preview-link gallery__preview-link_role_original" href="https://unsplash.com">ተጨማሪ መረጃ ለማግኘት</a>
+                                                        <a class="gallery__preview-link gallery__preview-link_role_author" href="#">StencilMaster</a>
+                                                        <a class="gallery__preview-link gallery__preview-link_role_photographer" href="https://unsplash.com">Mike Capture</a>
+                                                    </div>
+                                                </div>
+                                            </figcaption>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <footer class="page-footer">
+        <div class="page-footer__inner">
+            <div class="page-footer__group">
+                <p class="page-footer__text"><a class="page-footer__text-link" href="https://website-templates.github.io/simple-gallery_responsive-template/">Simple Gallery</a></p>
+                <p class="page-footer__text">Designed by&nbsp;<a class="page-footer__text-link" href="https://github.com/orlovmax">Maxim Orlov</a></p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
